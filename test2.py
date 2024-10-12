@@ -3,6 +3,19 @@ import streamlit as st  # Importer Streamlit
 import os
 import openai
 import sys
+
+import requests
+from bs4 import BeautifulSoup
+# Utiliser langchain ou langchain_community en fonction de votre configuration
+try:
+    from langchain_community.embeddings import OpenAIEmbeddings
+except ImportError:
+    from langchain.embeddings import OpenAIEmbeddings
+
+from langchain.vectorstores import DocArrayInMemorySearch  # ou langchain_community.vectorstores
+from langchain.document_loaders import PyPDFLoader  # ou langchain_community.document_loaders
+from langchain.chat_models import ChatOpenAI  # ou langchain_community.chat_models
+
 #from langchain_community.embeddings import OpenAIEmbeddings
 #from langchain_community.vectorstores import DocArrayInMemorySearch
 #from langchain_community.chat_models import ChatOpenAI
