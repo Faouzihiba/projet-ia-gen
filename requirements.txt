@@ -1,0 +1,9 @@
+PyYAML
+streamlit
+openai
+langchain
+python-dotenv
+PyPDF2
+smtplib
+beautifulsoup4
+requests
