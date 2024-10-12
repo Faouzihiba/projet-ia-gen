@@ -5,7 +5,7 @@ import openai
 import sys
 #from langchain.embeddings import OpenAIEmbeddings
 
-from langchain.vectorstores import DocArrayInMemorySearch  # ou langchain_community.vectorstores
+#from langchain.vectorstores import DocArrayInMemorySearch  # ou langchain_community.vectorstores
 from langchain.document_loaders import PyPDFLoader  # ou langchain_community.document_loaders
 from langchain.chat_models import ChatOpenAI  # ou langchain_community.chat_models
 
@@ -69,7 +69,6 @@ urls = [
     "https://www.mifuguemiraison.com/fr/voyage-tunisie-conseils-itineraire/",
     "https://www.exotismes.fr/voyages/6-sejour-martinique/13459-karibea-caribia.jsf?mtm_campaign=FDF&mtm_source=Googleads&mtm_group=googleads2023&gad_source=1&gclid=CjwKCAjwmaO4BhAhEiwA5p4YL89e2k4G_TZv_i_5pu2QfMtHX7JVTZzkuh8GfUvR0vmHbDBcODGpFRoClKgQAvD_BwE",
     "https://tripkygo.com/",
-    #"https://tripkygo.com/planificateur-voyage/83877",
     "https://tn.tunisiebooking.com/hotels-tunisie.html",
     "https://fr.hotels.com/co10233055/hotels-en-france/",
     "https://www.booking.com/country/it.fr.html",
@@ -183,7 +182,6 @@ user_input = st.text_input("Comment puis-je vous aider ?")
 if user_input:
     # Ajouter la réponse du chatbot
     bot_response = cb.conversation(user_input)
-    
     # Afficher la conversation dans la page principale
     st.markdown(f"**Utilisateur**: {user_input}")
     st.markdown(f"**Planificateur**: {bot_response}")
