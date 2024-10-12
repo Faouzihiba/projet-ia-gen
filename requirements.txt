@@ -3,7 +3,6 @@ openai==0.27.0
 langchain==0.0.200
 python-dotenv==1.0.0
 PyPDF2==1.26.0
-smtplib==0.1.0  # (Smtplib est inclus avec Python, pas besoin de l'ajouter ici)
 beautifulsoup4==4.12.0
 requests==2.28.0
 
