@@ -8,12 +8,12 @@ from langchain_community.vectorstores import DocArrayInMemorySearch
 from langchain_community.chat_models import ChatOpenAI
 
 from langchain.docstore.document import Document
-#from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-#from langchain.vectorstores import DocArrayInMemorySearch
+from langchain.vectorstores import DocArrayInMemorySearch
 from langchain.document_loaders import PyPDFLoader
 from langchain.chains import ConversationalRetrievalChain
-#from langchain.chat_models import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv, find_dotenv
 from PyPDF2 import PdfWriter, PdfReader
 import smtplib
