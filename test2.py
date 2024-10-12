@@ -3,7 +3,7 @@ import streamlit as st  # Importer Streamlit
 import os
 import openai
 import sys
-from langchain.embeddings import OpenAIEmbeddings
+#from langchain.embeddings import OpenAIEmbeddings
 
 from langchain.vectorstores import DocArrayInMemorySearch  # ou langchain_community.vectorstores
 from langchain.document_loaders import PyPDFLoader  # ou langchain_community.document_loaders
@@ -69,7 +69,7 @@ urls = [
     "https://www.mifuguemiraison.com/fr/voyage-tunisie-conseils-itineraire/",
     "https://www.exotismes.fr/voyages/6-sejour-martinique/13459-karibea-caribia.jsf?mtm_campaign=FDF&mtm_source=Googleads&mtm_group=googleads2023&gad_source=1&gclid=CjwKCAjwmaO4BhAhEiwA5p4YL89e2k4G_TZv_i_5pu2QfMtHX7JVTZzkuh8GfUvR0vmHbDBcODGpFRoClKgQAvD_BwE",
     "https://tripkygo.com/",
-    "https://tripkygo.com/planificateur-voyage/83877",
+    #"https://tripkygo.com/planificateur-voyage/83877",
     "https://tn.tunisiebooking.com/hotels-tunisie.html",
     "https://fr.hotels.com/co10233055/hotels-en-france/",
     "https://www.booking.com/country/it.fr.html",
