@@ -4,7 +4,7 @@ import os
 import openai
 import sys
 from langchain.embeddings import OpenAIEmbeddings
-
+import tiktoken
 #from langchain.vectorstores import DocArrayInMemorySearch  # ou langchain_community.vectorstores
 from langchain.document_loaders import PyPDFLoader  # ou langchain_community.document_loaders
 from langchain.chat_models import ChatOpenAI  # ou langchain_community.chat_models
