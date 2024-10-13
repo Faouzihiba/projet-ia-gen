@@ -32,7 +32,7 @@ sys.path.append('../..')
 # Charger les variables d'environnement
 _ = load_dotenv(find_dotenv())  # Lire le fichier .env local
 
-openai.api_key = 'sk-49RoKskvSfdc2VsgMcH3qhm5l8_pjH4E9tFt74pKLlT3BlbkFJraXhQF7U8iuyisdldJVIDMCmES89P83MrvdBNjSfMA'
+openai.api_key = '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'
 os.environ["OPENAI_API_KEY"] = openai.api_key
 
 llm_name = "gpt-3.5-turbo"
