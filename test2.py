@@ -3,7 +3,7 @@ import streamlit as st  # Importer Streamlit
 import os
 import openai
 import sys
-#from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings import OpenAIEmbeddings
 
 #from langchain.vectorstores import DocArrayInMemorySearch  # ou langchain_community.vectorstores
 from langchain.document_loaders import PyPDFLoader  # ou langchain_community.document_loaders
@@ -14,7 +14,7 @@ from langchain.chat_models import ChatOpenAI  # ou langchain_community.chat_mode
 #from langchain_community.chat_models import ChatOpenAI
 
 from langchain.docstore.document import Document
-#from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import DocArrayInMemorySearch
 from langchain.document_loaders import PyPDFLoader
