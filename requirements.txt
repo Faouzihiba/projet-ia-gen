@@ -8,6 +8,7 @@ langchain_community
 PyPDF2==3.0.0
 docarray==0.40.0
 tiktoken==0.8.0 
+gTTS==2.5.3
 
 
 
