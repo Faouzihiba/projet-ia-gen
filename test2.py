@@ -30,26 +30,7 @@ sys.path.append('../..')
 # Charger les variables d'environnement
 _ = load_dotenv(find_dotenv())  # Lire le fichier .env local
 
-# Fonction pour saisir la clé API OpenAI
-def ask_api_key():
-    if "api_key_verified" not in st.session_state:
-        api_key = st.text_input("Entrez votre clé OpenAI API :", type="password")
-        if api_key:
-            os.environ["OPENAI_API_KEY"] = api_key
-            st.session_state["api_key_verified"] = True
-            st.success("Clé API enregistrée avec succès.")
-        else:
-            st.warning("Veuillez entrer une clé API valide.")
-    else:
-        st.info("")
-# Appel de la fonction pour demander la clé API
 
-
-
-llm_name = "gpt-3.5-turbo"
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_ENDPOINT"] = "https://api.langchain.plus"
-os.environ["LANGCHAIN_API_KEY"] = "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"
 
 # URLs à charger
 urls = [
