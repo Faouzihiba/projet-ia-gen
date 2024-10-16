@@ -154,7 +154,7 @@ def scrape_website(url):
 
 # Fonction pour charger la base de données
 @st.cache_resource(show_spinner=False)
-#def load_db(urls, chain_type, k):
+def load_db(urls, chain_type, k):
     """Charge les données depuis des sites web pour créer une base de recherche."""
     documents = []
     for url in urls:
