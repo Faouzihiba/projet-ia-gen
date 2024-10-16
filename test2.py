@@ -30,6 +30,18 @@ sys.path.append('../..')
 # Charger les variables d'environnement
 _ = load_dotenv(find_dotenv())  # Lire le fichier .env local
 
+# Fonction pour saisir la clé API OpenAI
+def ask_api_key():
+    if "api_key_verified" not in st.session_state:
+        api_key = st.text_input("Entrez votre clé OpenAI API :", type="password")
+        if api_key:
+            os.environ["OPENAI_API_KEY"] = api_key
+            st.session_state["api_key_verified"] = True
+            st.success("Clé API enregistrée avec succès.")
+        else:
+            st.warning("Veuillez entrer une clé API valide.")
+    else:
+        st.info("")
 
 
 # URLs à charger
