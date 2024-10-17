@@ -171,8 +171,13 @@ def load_db(urls, chain_type, k):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
     docs = text_splitter.split_documents(documents)
 
-    # Créer des embeddings à partir des documents
-    embeddings = OpenAIEmbeddings()
+    # Vérifier si la clé API est valide avant de continuer
+    if "api_key" not in st.session_state or st.session_state.api_key is None:
+        st.error("La clé API n'est pas valide. Veuillez entrer une clé API valide.")
+        return None
+
+    # Créer des embeddings à partir des documents avec la clé API
+    embeddings = OpenAIEmbeddings(api_key=st.session_state.api_key)  # Assurez-vous d'utiliser la clé API ici
     db = DocArrayInMemorySearch.from_documents(docs, embeddings)
 
     # Créer le retriever pour la recherche par similarité
@@ -180,13 +185,14 @@ def load_db(urls, chain_type, k):
 
     # Créer la chaîne de conversation avec retrieval
     qa = ConversationalRetrievalChain.from_llm(
-        llm=ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0),
+        llm=ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0),  # Remplacez par votre modèle
         chain_type=chain_type,
         retriever=retriever,
         return_source_documents=True,
         return_generated_question=True,
     )
     return qa
+
 
 class Chatbot:
     def __init__(self):
