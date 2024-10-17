@@ -31,29 +31,16 @@ sys.path.append('../..')
 _ = load_dotenv(find_dotenv())  # Lire le fichier .env local
 
 def ask_api_key():
-    # Vérifier si la clé API a déjà été vérifiée
     if "api_key_verified" not in st.session_state:
-        # Saisir la clé API
         api_key = st.text_input("Entrez votre clé OpenAI API :", type="password")
-        
-        # Si une clé est saisie
         if api_key:
-            # Essayer de vérifier la clé API en faisant une requête à l'API OpenAI
             os.environ["OPENAI_API_KEY"] = api_key
-            openai.api_key = api_key
-            
-            try:
-                # Effectuer une requête simple pour vérifier la clé API
-                openai.Model.list()  # Cela renvoie la liste des modèles disponibles
-                st.session_state["api_key_verified"] = True
-                st.success("Clé API enregistrée avec succès.")
-            except openai.error.AuthenticationError as e:
-                # Gérer l'erreur d'authentification si la clé est invalide
-                st.error(f"Erreur avec la clé API : {str(e)}")
+            st.session_state["api_key_verified"] = True
+            st.success("Clé API enregistrée avec succès.")
         else:
             st.warning("Veuillez entrer une clé API valide.")
     else:
-        st.info("Clé API déjà vérifiée.")
+        st.info("")
 
 
 # URLs à charger
