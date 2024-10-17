@@ -30,6 +30,7 @@ sys.path.append('../..')
 # Charger les variables d'environnement
 _ = load_dotenv(find_dotenv())  # Lire le fichier .env local
 
+# Fonction pour saisir la clé API OpenAI
 def ask_api_key():
     if "api_key_verified" not in st.session_state:
         api_key = st.text_input("Entrez votre clé OpenAI API :", type="password")
@@ -42,6 +43,10 @@ def ask_api_key():
     else:
         st.info("")
 
+llm_name = "gpt-3.5-turbo"
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_ENDPOINT"] = "https://api.langchain.plus"
+os.environ["LANGCHAIN_API_KEY"] = "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"
 
 # URLs à charger
 urls = [
@@ -158,13 +163,8 @@ def load_db(urls, chain_type, k):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
     docs = text_splitter.split_documents(documents)
 
-    # Vérifier si la clé API est valide avant de continuer
-    if "api_key" not in st.session_state or st.session_state.api_key is None:
-        st.error("La clé API n'est pas valide. Veuillez entrer une clé API valide.")
-        return None
-
-    # Créer des embeddings à partir des documents avec la clé API
-    embeddings = OpenAIEmbeddings(api_key=st.session_state.api_key)  # Assurez-vous d'utiliser la clé API ici
+    # Créer des embeddings à partir des documents
+    embeddings = OpenAIEmbeddings()
     db = DocArrayInMemorySearch.from_documents(docs, embeddings)
 
     # Créer le retriever pour la recherche par similarité
@@ -172,14 +172,13 @@ def load_db(urls, chain_type, k):
 
     # Créer la chaîne de conversation avec retrieval
     qa = ConversationalRetrievalChain.from_llm(
-        llm=ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0),  # Remplacez par votre modèle
+        llm=ChatOpenAI(model_name=llm_name, temperature=0),
         chain_type=chain_type,
         retriever=retriever,
         return_source_documents=True,
         return_generated_question=True,
     )
     return qa
-
 
 class Chatbot:
     def __init__(self):
@@ -215,7 +214,7 @@ if "api_key_verified" not in st.session_state:
     ask_api_key()
 else:
     st.info("")
-
+#ask_api_key()
 # Charger les URLs pour initialiser la base de données
 cb.load_urls(urls)
 st.success("Cool.")
