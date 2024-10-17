@@ -30,19 +30,47 @@ sys.path.append('../..')
 # Charger les variables d'environnement
 _ = load_dotenv(find_dotenv())  # Lire le fichier .env local
 
+
+# URL de vérification de l'API OpenAI
+def verify_api_key(api_key):
+    try:
+        url = "https://api.openai.com/v1/models"
+        headers = {
+            "Authorization": f"Bearer {api_key}"
+        }
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return True
+        elif response.status_code == 401:
+            st.error(f"Erreur avec la clé API : {response.status_code} - {response.json()}")
+            return False
+        else:
+            st.error(f"Erreur inattendue : {response.status_code} - {response.json()}")
+            return False
+    except requests.exceptions.RequestException as e:
+        st.error(f"Erreur de connexion : {e}")
+        return False
+
 # Fonction pour saisir la clé API OpenAI
 def ask_api_key():
     if "api_key_verified" not in st.session_state:
+        # Saisir la clé API
         api_key = st.text_input("Entrez votre clé OpenAI API :", type="password")
+
         if api_key:
-            os.environ["OPENAI_API_KEY"] = api_key
-            st.session_state["api_key_verified"] = True
-            st.success("Clé API enregistrée avec succès.")
+            # Vérifier si la clé API est valide
+            if verify_api_key(api_key):
+                os.environ["OPENAI_API_KEY"] = api_key
+                st.session_state["api_key_verified"] = True
+                st.success("Clé API enregistrée avec succès.")
+            else:
+                st.error("Clé API invalide. Veuillez réessayer.")
         else:
             st.warning("Veuillez entrer une clé API valide.")
     else:
-        st.info("")
-
+        st.info("Clé API déjà vérifiée.")
+        
 llm_name = "gpt-3.5-turbo"
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.langchain.plus"
